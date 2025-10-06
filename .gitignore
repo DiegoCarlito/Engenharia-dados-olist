@@ -30,7 +30,6 @@ config.ini
 
 # --- Logs e Arquivos Gerados ---
 *.log
-*.csv
 *.parquet
 
 # --- Docker ---
