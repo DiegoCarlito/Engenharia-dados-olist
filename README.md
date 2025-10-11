@@ -9,7 +9,7 @@ Este projeto foi desenvolvido para a disciplina de Sistemas de Banco de Dados 2 
 ## 🛠️ Tecnologias Utilizadas
 
 - **Linguagem:** Python
-- **Bibliotecas:** PySpark
+- **Bibliotecas:** PySpark, Pandas, Matplotlib e Seaborn
 - **Banco de Dados:** PostgreSQL
 - **Orquestração/Ambiente:** Docker
 - **Visualização:** Power BI
