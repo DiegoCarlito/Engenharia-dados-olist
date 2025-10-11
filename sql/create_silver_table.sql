@@ -9,13 +9,6 @@
 --
 -- PROJETO => 01 Base de Dados
 --         => 01 Tabela
---         => 00 Visoes
---         => 00 Perfis (role)
---         => 00 Usuarios
---         => 00 Sequencias
---         => 00 Triggers
---         => 00 Procedimentos
---         => 00 Funcoes
 -- ---------------------------------------------------------
 
 DROP TABLE IF EXISTS pedidos;
