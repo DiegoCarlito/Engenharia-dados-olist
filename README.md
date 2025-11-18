@@ -2,80 +2,99 @@
 
 ## 📖 Sobre o Projeto
 
-Projeto de engenharia de dados ponta a ponta para análise do ecossistema de e-commerce brasileiro utilizando o dataset da [Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). O pipeline implementa a Arquitetura Medalhão (Bronze, Silver, Gold) para processar os dados brutos, modela um Data Warehouse em Star Schema e culmina em dashboards analíticos para visualização de KPIs de vendas.
+Projeto de engenharia de dados ponta a ponta para análise do ecossistema de e-commerce brasileiro utilizando o dataset da [Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). O pipeline implementa a **Arquitetura Medalhão (Bronze, Silver, Gold)** para processar os dados brutos, modela um **Data Warehouse em Star Schema** e culmina em dashboards analíticos para visualização de KPIs de vendas.
 
 Este projeto foi desenvolvido para a disciplina de Sistemas de Banco de Dados 2 (2025/2).
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Linguagem:** Python
-- **Bibliotecas:** PySpark, Pandas, Matplotlib e Seaborn
-- **Banco de Dados:** PostgreSQL
-- **Orquestração/Ambiente:** Docker
-- **Visualização:** Power BI
+- **Linguagem:** Python  
+- **Processamento de Dados:** PySpark  
+- **Análise e Visualização:** Pandas, Matplotlib, Seaborn  
+- **Banco de Dados:** PostgreSQL  
+- **Infraestrutura como Código:** Docker e Docker Compose  
+- **Visualização Final:** Power BI  
+
+## 📁 Arquitetura do Repositório
+
+O projeto é organizado em duas pastas principais, seguindo a separação de responsabilidades:
+
+1. **`DataLayer`** — Armazena os dados e sua documentação associada em cada camada da Arquitetura Medalhão.
+2. **`Transformer`** — Contém a lógica de processamento (pipelines de ETL) que move e transforma os dados entre as camadas.
+
+### Estrutura de diretórios
+
+```text
+├── DataLayer
+│   ├── raw                         # CAMADA BRONZE (Dados brutos)
+│   │
+│   ├── silver                      # CAMADA SILVER (Dados limpos e unificados)
+│   │
+│   └── gold                        # CAMADA GOLD (Data Warehouse)
+│
+├── Transformer
+    └── ETL
+        ├── raw_to_silver.ipynb
+        └── silver_to_gold.ipynb
+````
+
+## 🚀 Configuração e Execução
+
+Siga os passos abaixo para configurar o ambiente e executar o pipeline completo da Camada Bronze até a Gold.
 
 ### 📋 Pré-requisitos
 
-Antes de começar, garanta que você tenha os seguintes softwares instalados:
--   [Git](https://git-scm.com/)
--   [Python](https://www.python.org/downloads/) (versão 3.9 ou superior)
--   [Docker](https://www.docker.com/products/docker-desktop/) e Docker Compose
+* [Git](https://git-scm.com/)
+* [Python 3.9+](https://www.python.org/downloads/)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### ⚙️ Passos para Execução
 
-1.  **Clonar o Repositório:**
-    ```sh
-    git clone https://github.com/DiegoCarlito/Engenharia-dados-olist.git
-    cd Engenharia-dados-olist
-    ```
+1. **Clonar o Repositório**
 
-2.  **Configurar o Ambiente Virtual:**
-    ```sh
-    # Criar o ambiente virtual
-    python -m venv venv
+   ```sh
+   git clone https://github.com/DiegoCarlito/Engenharia-dados-olist.git
+   cd Engenharia-dados-olist
+   ```
 
-    # Ativar o ambiente
-    # Windows
-    .\venv\Scripts\activate
-    # macOS / Linux
-    source venv/bin/activate
-    ```
+2. **Criar e Ativar Ambiente Virtual**
 
-3.  **Instalar as Dependências:**
-    ```sh
-    pip install -r requirements.txt
-    ```
+   ```sh
+   python -m venv venv
+   source venv/bin/activate      # Linux/Mac
+   # .\venv\Scripts\activate     # Windows
+   ```
 
-4.  **Configurar as Credenciais do Banco de Dados:**
-    O projeto utiliza um arquivo `.env` para gerenciar as credenciais de forma segura.
-    ```sh
-    # Copie o arquivo de exemplo
-    cp .env.example .env
-    ```
-    Agora, abra o arquivo `.env` e preencha as variáveis com seus valores (especialmente `DB_PASSWORD`).
+3. **Instalar Dependências**
 
-5.  **Executar o ETL (Bronze -> Prata):**
-    Este notebook lê os dados brutos da camada Bronze, aplica as transformações e salva o resultado em formato Parquet na camada Prata.
-    ```sh
-    # Execute o notebook 02 (ou rode-o via VS Code)
-    # Esta etapa pode demorar alguns minutos
-    ```
-    Após a execução, a pasta `/data/silver/pedidos` será criada.
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-6.  **Iniciar o Banco de Dados com Docker:**
-    ```sh
-    docker-compose up -d
-    ```
+4. **Configurar o Arquivo `.env`**
 
-7.  **Popular o Banco de Dados:**
-    Este script lê os arquivos Parquet da camada Prata e os insere na tabela `pedidos` do PostgreSQL.
-    ```sh
-    python notebooks/03_popula_banco_silver.py
-    ```
+   ```sh
+   cp .env.example .env
+   ```
 
-## 📁 Estrutura do Repositório
+   Edite o arquivo `.env` com suas informações.
 
-- `/data`: Contém os dados nas camadas Bronze, Silver e Gold.
-- `/notebooks`: Contém os Jupyter Notebooks para análise, ETL e outros scripts.
-- `/sql`: Scripts SQL para DDL, DML e consultas.
-- `/docs`: Documentação do projeto, dicionários de dados e modelos.
+5. **Subir Container PostgreSQL**
+
+   ```sh
+   docker-compose up -d
+   ```
+
+6. **Pipeline Bronze → Silver**
+   Execute o notebook:
+
+   ```
+   Transformer/ETL/raw_to_silver.ipynb
+   ```
+
+7. **Pipeline Silver → Gold**
+   Execute o notebook:
+
+   ```
+   Transformer/ETL/silver_to_gold.ipynb
+   ```
