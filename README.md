@@ -53,8 +53,8 @@ Siga os passos abaixo para configurar o ambiente e executar o pipeline completo 
 1. **Clonar o Repositório**
 
    ```sh
-   git clone https://github.com/DiegoCarlito/Engenharia-dados-olist.git
-   cd Engenharia-dados-olist
+   git clone https://github.com/DiegoCarlito/Olist-data-engineering.git
+   cd Olist-data-engineering
    ```
 
 2. **Criar e Ativar Ambiente Virtual**
